@@ -1,0 +1,84 @@
+\documentclass[11pt,a4j]{jarticle}%jarticleを使用
+\usepackage[dvipdfmx]{graphicx}%画像表示の設定
+\usepackage{amsmath}%数式周りの強化
+\usepackage[all, warning]{onlyamsmath}%eqnarrayを禁止
+\usepackage[top=5truemm,bottom=30truemm,left=20truemm,right=20truemm]{geometry}%ページの余白を調整
+\usepackage{cite}%引用を整備
+\usepackage{ascmac}%screen環境による箱囲みを利用
+\usepackage{url}%urlを成形する
+\usepackage{listings}%listingによりソースコード表示を補助
+%ここまで表示に関する設定
+
+%以下listing時の表示に関する設定
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
+%ここからタイトル
+
+\begin{document}
+\begin{center}
+{\huge \bf アセンブラPDF}
+\end{center}
+\begin{flushright}
+ver.1.0 {\bf le3hw} 2020/4/30
+\end{flushright}
+
+%ここから本文
+
+\section{アセンブラについて}
+本資料は、計算機科学実験及演習3で利用可能なSIMPLE向けアセンブラーに関するものです。命令に関する詳細は、別資料のSIMPLE 設計資料 (ver 4.0: 20200415)を参照してください。
+\subsection{使い方}
+テキストに命令を実行順で書き下します。引数については以下の表1の順で記載してください。
+サンプルテキストとしてsample1.txtを用意してありますのでそちらもご確認ください。
+インプットするファイルが準備できたら、
+\begin{lstlisting}[label=fuga]
+$python3 assembler.py input-file [output-file]
+\end{lstlisting}
+で、当プログラムを実行します。pythonのバージョンは3.7.6です。output-fileを省略した場合は標準出力に出力されます.
+\begin{table}[htbp]
+\centering
+\caption{input-file内の引数の表記順}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{命令}  & \textbf{第一引数} & \textbf{第二引数} & \textbf{第三引数} \\ \hline
+\textbf{ADD} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{SUB} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{AND} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{OR}  & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{XOR} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{CMP} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{MOV} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{SLL} & R{[}Rd{]}     & d             &               \\ \hline
+\textbf{SLR} & R{[}Rd{]}     & d             &               \\ \hline
+\textbf{SRL} & R{[}Rd{]}     & d             &               \\ \hline
+\textbf{SRA} & R{[}Rd{]}     & d             &               \\ \hline
+\textbf{JAL} & R{[}Rd{]}     & R{[}Rs{]}     &               \\ \hline
+\textbf{HLT} &            &               &               \\ \hline
+\textbf{LD}  & R{[}Ra{]}     & d             & R{[}Rb{]}     \\ \hline
+\textbf{ST}  & R{[}Ra{]}     & d             & R{[}Rb{]}     \\ \hline
+\textbf{LI}  & R{[}Rb{]}     & d             &               \\ \hline
+\textbf{ADDI}& R{[}Rb{]}     & d             &               \\ \hline
+\textbf{CMPI}& R{[}Rb{]}     & d             &               \\ \hline
+\textbf{BE}  & d             &               &               \\ \hline
+\textbf{BLT} & d             &               &               \\ \hline
+\textbf{BLE} & d             &               &               \\ \hline
+\textbf{BNE} & d             &               &               \\ \hline
+\end{tabular}
+\end{table}
+
+\end{document}
